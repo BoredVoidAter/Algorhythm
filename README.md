@@ -40,11 +40,17 @@ Whether it's an **elegant sorting algorithm**, a **clever UI trick in CSS**, or 
 
 We've packed Algorhythm with features designed for discovery and engagement.
 
-*   **📱 Infinite Vertical Feed:** Our core experience. Scroll endlessly through a stream of code snippets curated just for you. The next "aha!" moment is just a swipe away.
+*   **Core Snippet Feed and Rendering:**
+    *   **Infinite Vertical Feed:** Our core experience. Scroll endlessly through a stream of code snippets curated just for you. The next "aha!" moment is just a swipe away.
+    *   **Interactive Syntax Highlighting:** Beautiful, multi-language support makes your code readable and professional. Each snippet is rendered in a distinct card with its associated user-provided description.
 
-*   **💡 Share Your Genius:** Post your own code snippets with ease.
-    *   **Interactive Syntax Highlighting:** Beautiful, multi-language support makes your code readable and professional.
-    *   **Integrated Explanations:** Add context, explain your logic, or tell the story behind your code right alongside the snippet.
+*   **User Authentication and Profiles:**
+    *   **Secure Registration & Login:** Users can register and log in with email and password.
+    *   **Basic User Profiles:** Upon registration, a basic user profile is created to associate users with the content they post.
+
+*   **Snippet Creation and Posting:**
+    *   **Intuitive Snippet Form:** Authenticated users can easily post new snippets.
+    *   **Code, Title, and Language Selection:** The form includes a text area for the code, a field for a title or explanation, and a way to select the code's programming language to ensure correct syntax highlighting.
 
 *   **🚀 Viral Engagement:** We're built for community interaction.
     *   **Coding Challenges:** Participate in weekly challenges to test your skills and see how others tackle the same problem.
@@ -83,28 +89,37 @@ Ready to dive in, contribute, or just run the project locally? Follow these step
     cd algorhythm
     ```
 
-3.  **Install dependencies:**
+3.  **Install server dependencies:**
     ```bash
+    cd server
     npm install
-    # or
-    yarn install
+    cd ..
     ```
 
-4.  **Set up your environment variables:**
-    *   Create a `.env` file in the root of the project by copying the example file.
-        ```bash
-        cp .env.example .env
-        ```
-    *   Open the `.env` file and fill in the necessary API keys and database URLs.
-
-5.  **Run the development server:**
+4.  **Install client dependencies:**
     ```bash
-    npm run dev
-    # or
-    yarn dev
+    cd client
+    npm install
+    cd ..
     ```
 
-6.  **Open your browser** and navigate to `http://localhost:3000` to see Algorhythm in action!
+5.  **Set up your environment variables:**
+    *   Create a `.env` file in the root of the `server` directory by copying the example file (if you have one).
+    *   Open the `.env` file and fill in the necessary API keys and database URLs (e.g., `JWT_SECRET=your_jwt_secret_key`).
+
+6.  **Run the development servers:**
+    *   In one terminal, start the backend server:
+        ```bash
+        cd server
+        node index.js
+        ```
+    *   In another terminal, start the frontend development server:
+        ```bash
+        cd client
+        npm start
+        ```
+
+7.  **Open your browser** and navigate to `http://localhost:3000` to see Algorhythm in action! The backend will be running on `http://localhost:5000`.
 
 ## 🤝 Contributing
 
