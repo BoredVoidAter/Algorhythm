@@ -15,6 +15,14 @@ const Snippet = sequelize.define('Snippet', {
   language: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  likesCount: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  },
+  tags: {
+    type: DataTypes.STRING, // Storing tags as a comma-separated string
+    allowNull: true
   }
 });
 

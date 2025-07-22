@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import SnippetForm from './components/SnippetForm';
 import SnippetFeed from './components/SnippetFeed';
+import BookmarkList from './components/BookmarkList';
 
 function App() {
   return (
@@ -14,12 +15,14 @@ function App() {
           <Link to="/login" style={styles.navLink}>Login</Link>
           <Link to="/register" style={styles.navLink}>Register</Link>
           <Link to="/create" style={styles.navLink}>Create Snippet</Link>
+          <Link to="/bookmarks" style={styles.navLink}>Bookmarks</Link>
         </nav>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/create" element={<SnippetForm />} />
           <Route path="/" element={<SnippetFeed />} />
+          <Route path="/bookmarks" element={<BookmarkList />} />
         </Routes>
       </div>
     </Router>

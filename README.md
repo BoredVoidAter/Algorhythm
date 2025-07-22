@@ -52,6 +52,17 @@ We've packed Algorhythm with features designed for discovery and engagement.
     *   **Intuitive Snippet Form:** Authenticated users can easily post new snippets.
     *   **Code, Title, and Language Selection:** The form includes a text area for the code, a field for a title or explanation, and a way to select the code's programming language to ensure correct syntax highlighting.
 
+*   **Snippet Engagement and Bookmarking:**
+    *   **Like Snippets:** Show appreciation for snippets by liking them. The total like count is publicly visible.
+    *   **Bookmark Snippets:** Save snippets to a private collection for later reference.
+
+*   **Commenting on Snippets:**
+    *   **Collaborative Comments:** Authenticated users can post comments below each snippet to ask questions, offer feedback, or discuss implementations.
+
+*   **Content Tagging and Discovery:**
+    *   **Tagging System:** Creators can add relevant keywords (e.g., `#javascript`, `#animation`) to their snippets.
+    *   **Filter by Tags:** Users can click on tags to filter the feed and discover snippets with specific tags.
+
 *   **🚀 Viral Engagement:** We're built for community interaction.
     *   **Coding Challenges:** Participate in weekly challenges to test your skills and see how others tackle the same problem.
     *   **Community Forks:** See a snippet you can improve or want to experiment with? "Fork" it, add your spin, and share it with the community.

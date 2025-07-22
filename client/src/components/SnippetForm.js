@@ -7,6 +7,7 @@ const SnippetForm = () => {
   const [title, setTitle] = useState('');
   const [code, setCode] = useState('');
   const [language, setLanguage] = useState('javascript');
+  const [tags, setTags] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -14,7 +15,7 @@ const SnippetForm = () => {
     const token = localStorage.getItem('token');
     try {
       await axios.post('http://localhost:5000/api/snippets', 
-        { title, code, language },
+        { title, code, language, tags },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert('Snippet posted successfully!');
@@ -70,6 +71,10 @@ const SnippetForm = () => {
             <option value="shell">Shell</option>
             <option value="text">Plain Text</option>
           </select>
+        </div>
+        <div>
+          <label>Tags (comma-separated):</label>
+          <input type="text" value={tags} onChange={(e) => setTags(e.target.value)} placeholder="e.g., javascript, react, ui" />
         </div>
         <button type="submit">Post Snippet</button>
       </form>
