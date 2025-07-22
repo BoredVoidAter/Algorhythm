@@ -7,6 +7,8 @@ const commentRoutes = require('./routes/comments');
 const bookmarkRoutes = require('./routes/bookmarks');
 const followRoutes = require('./routes/follows');
 const challengeRoutes = require('./routes/challenges');
+const collectionRoutes = require('./routes/collections');
+const notificationRoutes = require('./routes/notifications');
 const UserInteraction = require('./models/userInteraction');
 const sequelize = require('./config/database');
 
@@ -21,6 +23,8 @@ app.use('/api/comments', commentRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 app.use('/api/follows', followRoutes);
 app.use('/api/challenges', challengeRoutes);
+app.use('/api/collections', collectionRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 const PORT = process.env.PORT || 5000;
 

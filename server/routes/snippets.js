@@ -5,6 +5,7 @@ const auth = require('../middleware/auth');
 const Snippet = require('../models/snippet');
 const User = require('../models/user');
 const UserInteraction = require('../models/userInteraction');
+const Notification = require('../models/notification');
 const { Op } = require('sequelize');
 
 const router = express.Router();
@@ -126,6 +127,17 @@ router.post('/:id/like', auth, async (req, res) => {
     }
 
     res.json(snippet);
+
+    // Create notification for the snippet owner
+    if (snippet.userId !== req.user.userId) { // Don't notify if user likes their own snippet
+      await Notification.create({
+        userId: snippet.userId,
+        type: 'like',
+        sourceId: snippet.id,
+        message: `Your snippet "${snippet.title}" was liked by ${req.user.email}.`,
+      });
+    }
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -150,6 +162,17 @@ router.post('/:id/fork', auth, async (req, res) => {
     });
 
     res.status(201).json(forkedSnippet);
+
+    // Create notification for the original snippet owner
+    if (originalSnippet.userId !== req.user.userId) { // Don't notify if user forks their own snippet
+      await Notification.create({
+        userId: originalSnippet.userId,
+        type: 'fork',
+        sourceId: originalSnippet.id,
+        message: `Your snippet "${originalSnippet.title}" was forked by ${req.user.email}.`,
+      });
+    }
+
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

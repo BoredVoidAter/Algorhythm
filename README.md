@@ -64,6 +64,9 @@ We've packed Algorhythm with features designed for discovery and engagement.
     *   **Filter by Tags:** Users can click on tags to filter the feed and discover snippets with specific tags.
 
 *   **🚀 Viral Engagement:** We're built for community interaction.
+    *   **Interactive Snippet Previews**: Engage with front-end code snippets (HTML, CSS, JavaScript) directly within the feed through live, sandboxed previews for UI components, animations, and data visualizations.
+    *   **User-Curated Collections**: Create and manage public 'Collections' of related snippets from various creators (e.g., 'Advanced React Patterns', 'CSS Animation Tricks'), which can be shared and followed by others.
+    *   **Real-time Notification Center**: Stay updated with a dedicated notification panel for likes, new comments, replies, new followers, and code forks.
     *   **Coding Challenges:** Participate in weekly challenges to test your skills and see how others tackle the same problem.
     *   **Community Forks:** See a snippet you can improve or want to experiment with? "Fork" it, add your spin, and share it with the community.
     *   **Personalized Recommendations:** Our custom algorithm learns what you love—be it JavaScript animations, Python data science, or Rust performance hacks—and personalizes your feed.

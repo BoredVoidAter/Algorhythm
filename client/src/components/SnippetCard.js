@@ -10,6 +10,8 @@ const SnippetCard = ({ snippet }) => {
   const [newComment, setNewComment] = useState('');
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [showCollectionDropdown, setShowCollectionDropdown] = useState(false);
+  const [userCollections, setUserCollections] = useState([]);
 
   const navigate = useNavigate();
 
@@ -21,7 +23,38 @@ const SnippetCard = ({ snippet }) => {
     if (token && snippet.User) {
       checkFollowingStatus();
     }
+    if (token) {
+      fetchUserCollections();
+    }
   }, [snippet.id, token, snippet.User]);
+
+  const fetchUserCollections = async () => {
+    try {
+      const res = await axios.get('http://localhost:5000/api/collections/my', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      setUserCollections(res.data);
+    } catch (err) {
+      console.error('Error fetching user collections:', err);
+    }
+  };
+
+  const handleAddToCollection = () => {
+    setShowCollectionDropdown(!showCollectionDropdown);
+  };
+
+  const handleSelectCollection = async (collectionId) => {
+    if (!collectionId) return;
+    try {
+      await axios.post(`http://localhost:5000/api/collections/${collectionId}/snippets/${snippet.id}`, {},
+        { headers: { 'Authorization': `Bearer ${token}` } });
+      alert('Snippet added to collection!');
+      setShowCollectionDropdown(false);
+    } catch (err) {
+      console.error('Error adding snippet to collection:', err);
+      alert('Error adding snippet to collection.');
+    }
+  };
 
   const fetchComments = async () => {
     try {
@@ -143,6 +176,24 @@ const SnippetCard = ({ snippet }) => {
       <SyntaxHighlighter language={snippet.language} style={dracula}>
         {snippet.code}
       </SyntaxHighlighter>
+
+      {/* Interactive Snippet Preview */}
+      {(snippet.language === 'html' || snippet.language === 'css' || snippet.language === 'javascript') && (
+        <div style={styles.previewContainer}>
+          <h4>Live Preview:</h4>
+          <iframe
+            title="Snippet Preview"
+            srcDoc={
+              snippet.language === 'html' ? snippet.code :
+              snippet.language === 'css' ? `<style>${snippet.code}</style>` :
+              `<script>${snippet.code}</script>`
+            }
+            style={styles.previewFrame}
+            sandbox="allow-scripts allow-same-origin" // Basic sandboxing for security
+          />
+        </div>
+      )}
+
       <div style={styles.engagement}>
         <span>Likes: {snippet.likesCount}</span>
         <button onClick={handleLike} style={styles.button}>Like</button>
@@ -154,6 +205,17 @@ const SnippetCard = ({ snippet }) => {
           <button onClick={isFollowing ? handleUnfollow : handleFollow} style={styles.button}>
             {isFollowing ? 'Unfollow' : 'Follow'}
           </button>
+        )}
+        {token && (
+          <button onClick={handleAddToCollection} style={styles.button}>Add to Collection</button>
+        )}
+        {showCollectionDropdown && (
+          <select onChange={(e) => handleSelectCollection(e.target.value)} style={styles.collectionSelect}>
+            <option value="">Select Collection</option>
+            {userCollections.map(collection => (
+              <option key={collection.id} value={collection.id}>{collection.name}</option>
+            ))}
+          </select>
         )}
       </div>
       {snippet.tags && (
@@ -245,6 +307,23 @@ const styles = {
     padding: '8px',
     borderRadius: '5px',
     border: '1px solid #ddd',
+  },
+  previewContainer: {
+    marginTop: '20px',
+    border: '1px solid #eee',
+    borderRadius: '8px',
+    overflow: 'hidden',
+  },
+  previewFrame: {
+    width: '100%',
+    height: '300px',
+    border: 'none',
+  },
+  collectionSelect: {
+    padding: '8px',
+    borderRadius: '5px',
+    border: '1px solid #ddd',
+    marginLeft: '10px',
   },
 };
 

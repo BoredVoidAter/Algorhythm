@@ -3,6 +3,7 @@ const auth = require('../middleware/auth');
 const Follow = require('../models/follow');
 const User = require('../models/user');
 const Snippet = require('../models/snippet');
+const Notification = require('../models/notification');
 
 const router = express.Router();
 
@@ -25,6 +26,18 @@ router.post('/:id/follow', auth, async (req, res) => {
     }
 
     await Follow.create({ followerId, followingId });
+
+    // Create notification for the followed user
+    const followedUser = await User.findByPk(followingId);
+    if (followedUser) {
+      await Notification.create({
+        userId: followedUser.id,
+        type: 'follow',
+        sourceId: followerId,
+        message: `${req.user.email} is now following you.`,
+      });
+    }
+
     res.status(200).json({ msg: 'User followed successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
