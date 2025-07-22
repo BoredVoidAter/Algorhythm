@@ -5,6 +5,9 @@ import Register from './components/Register';
 import SnippetForm from './components/SnippetForm';
 import SnippetFeed from './components/SnippetFeed';
 import BookmarkList from './components/BookmarkList';
+import FollowingFeed from './components/FollowingFeed';
+import ChallengeList from './components/ChallengeList';
+import ChallengeDetail from './components/ChallengeDetail';
 
 function App() {
   return (
@@ -16,6 +19,8 @@ function App() {
           <Link to="/register" style={styles.navLink}>Register</Link>
           <Link to="/create" style={styles.navLink}>Create Snippet</Link>
           <Link to="/bookmarks" style={styles.navLink}>Bookmarks</Link>
+          <Link to="/following" style={styles.navLink}>Following</Link>
+          <Link to="/challenges" style={styles.navLink}>Challenges</Link>
         </nav>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -23,6 +28,10 @@ function App() {
           <Route path="/create" element={<SnippetForm />} />
           <Route path="/" element={<SnippetFeed />} />
           <Route path="/bookmarks" element={<BookmarkList />} />
+          <Route path="/following" element={<FollowingFeed />} />
+          <Route path="/challenges" element={<ChallengeList />} />
+          <Route path="/challenges/:id" element={<ChallengeDetail />} />
+          <Route path="/fork/:id" element={<SnippetForm />} />
         </Routes>
       </div>
     </Router>

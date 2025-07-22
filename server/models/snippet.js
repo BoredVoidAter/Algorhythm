@@ -23,6 +23,14 @@ const Snippet = sequelize.define('Snippet', {
   tags: {
     type: DataTypes.STRING, // Storing tags as a comma-separated string
     allowNull: true
+  },
+  forkedFrom: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'Snippets',
+      key: 'id'
+    }
   }
 });
 

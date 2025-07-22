@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import axios from 'axios';
@@ -8,13 +9,19 @@ const SnippetCard = ({ snippet }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
 
   useEffect(() => {
     fetchComments();
     checkBookmarkStatus();
-  }, [snippet.id]);
+    if (token && snippet.User) {
+      checkFollowingStatus();
+    }
+  }, [snippet.id, token, snippet.User]);
 
   const fetchComments = async () => {
     try {
@@ -35,6 +42,48 @@ const SnippetCard = ({ snippet }) => {
       setIsBookmarked(bookmarked);
     } catch (err) {
       console.error('Error checking bookmark status:', err);
+    }
+  };
+
+  const checkFollowingStatus = async () => {
+    if (!token || !snippet.User) return;
+    try {
+      const res = await axios.get('http://localhost:5000/api/follows/following/snippets', { // This endpoint returns snippets from followed users, not a list of followed users.
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      // A more robust check would be to have an endpoint that returns if a user is followed or a list of followed user IDs.
+      // For now, we'll assume if any snippet from this user is in the following feed, they are followed.
+      // This is a simplification and might not be accurate.
+      const followed = res.data.some(s => s.userId === snippet.User.id);
+      setIsFollowing(followed);
+    } catch (err) {
+      console.error('Error checking following status:', err);
+    }
+  };
+
+  const handleFollow = async () => {
+    try {
+      await axios.post(`http://localhost:5000/api/follows/${snippet.User.id}/follow`, {}, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      setIsFollowing(true);
+      alert('User followed!');
+    } catch (err) {
+      console.error('Error following user:', err);
+      alert('Error following user.');
+    }
+  };
+
+  const handleUnfollow = async () => {
+    try {
+      await axios.post(`http://localhost:5000/api/follows/${snippet.User.id}/unfollow`, {}, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      setIsFollowing(false);
+      alert('User unfollowed!');
+    } catch (err) {
+      console.error('Error unfollowing user:', err);
+      alert('Error unfollowing user.');
     }
   };
 
@@ -83,6 +132,10 @@ const SnippetCard = ({ snippet }) => {
     }
   };
 
+  const handleFork = () => {
+    navigate(`/fork/${snippet.id}`);
+  };
+
   return (
     <div style={styles.card}>
       <h3>{snippet.title}</h3>
@@ -96,6 +149,12 @@ const SnippetCard = ({ snippet }) => {
         <button onClick={handleBookmark} style={styles.button}>
           {isBookmarked ? 'Remove Bookmark' : 'Bookmark'}
         </button>
+        <button onClick={handleFork} style={styles.button}>Fork</button>
+        {token && snippet.User && snippet.User.id !== JSON.parse(atob(token.split('.')[1])).userId && (
+          <button onClick={isFollowing ? handleUnfollow : handleFollow} style={styles.button}>
+            {isFollowing ? 'Unfollow' : 'Follow'}
+          </button>
+        )}
       </div>
       {snippet.tags && (
         <div style={styles.tags}>

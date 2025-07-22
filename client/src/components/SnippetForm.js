@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,6 +10,26 @@ const SnippetForm = () => {
   const [language, setLanguage] = useState('javascript');
   const [tags, setTags] = useState('');
   const navigate = useNavigate();
+  const { id: forkId } = useParams(); // Get forkId from URL
+
+  useEffect(() => {
+    if (forkId) {
+      const fetchOriginalSnippet = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5000/api/snippets/${forkId}`);
+          const originalSnippet = response.data;
+          setTitle(`Fork of ${originalSnippet.title}`);
+          setCode(originalSnippet.code);
+          setLanguage(originalSnippet.language);
+          setTags(originalSnippet.tags);
+        } catch (err) {
+          console.error('Failed to fetch original snippet for forking:', err);
+          alert('Failed to load original snippet for forking.');
+        }
+      };
+      fetchOriginalSnippet();
+    }
+  }, [forkId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
