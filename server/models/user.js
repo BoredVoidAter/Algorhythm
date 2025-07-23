@@ -11,6 +11,26 @@ const User = sequelize.define('User', {
   password: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  bio: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  githubLink: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  personalWebsiteLink: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  pinnedSnippetId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'Snippets',
+      key: 'id'
+    }
   }
 });
 

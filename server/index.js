@@ -9,6 +9,8 @@ const followRoutes = require('./routes/follows');
 const challengeRoutes = require('./routes/challenges');
 const collectionRoutes = require('./routes/collections');
 const notificationRoutes = require('./routes/notifications');
+const userRoutes = require('./routes/users');
+const messageRoutes = require('./routes/messages');
 const UserInteraction = require('./models/userInteraction');
 const sequelize = require('./config/database');
 
@@ -25,6 +27,8 @@ app.use('/api/follows', followRoutes);
 app.use('/api/challenges', challengeRoutes);
 app.use('/api/collections', collectionRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/messages', messageRoutes);
 
 const PORT = process.env.PORT || 5000;
 

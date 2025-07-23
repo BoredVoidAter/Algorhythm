@@ -31,6 +31,14 @@ const Snippet = sequelize.define('Snippet', {
       model: 'Snippets',
       key: 'id'
     }
+  },
+  audioWalkthroughUrl: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  videoWalkthroughUrl: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 });
 

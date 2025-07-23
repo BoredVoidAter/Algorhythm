@@ -11,6 +11,9 @@ import ChallengeDetail from './components/ChallengeDetail';
 import CollectionList from './components/CollectionList';
 import CollectionDetail from './components/CollectionDetail';
 import NotificationCenter from './components/NotificationCenter';
+import UserProfile from './components/UserProfile';
+import MessageList from './components/MessageList';
+import MessageForm from './components/MessageForm';
 
 function App() {
   return (
@@ -27,6 +30,8 @@ function App() {
           <Link to="/collections" style={styles.navLink}>Collections</Link>
           <Link to="/my-collections" style={styles.navLink}>My Collections</Link>
           <Link to="/notifications" style={styles.navLink}>Notifications</Link>
+          <Link to="/profile/:id" style={styles.navLink}>My Profile</Link>
+          <Link to="/messages" style={styles.navLink}>Messages</Link>
         </nav>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -42,6 +47,9 @@ function App() {
           <Route path="/my-collections" element={<CollectionList />} />
           <Route path="/fork/:id" element={<SnippetForm />} />
           <Route path="/notifications" element={<NotificationCenter />} />
+          <Route path="/profile/:id" element={<UserProfile />} />
+          <Route path="/messages" element={<MessageList />} />
+          <Route path="/messages/new/:receiverId" element={<MessageForm />} />
         </Routes>
       </div>
     </Router>

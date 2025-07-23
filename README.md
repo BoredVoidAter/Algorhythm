@@ -43,10 +43,11 @@ We've packed Algorhythm with features designed for discovery and engagement.
 *   **Core Snippet Feed and Rendering:**
     *   **Infinite Vertical Feed:** Our core experience. Scroll endlessly through a stream of code snippets curated just for you. The next "aha!" moment is just a swipe away.
     *   **Interactive Syntax Highlighting:** Beautiful, multi-language support makes your code readable and professional. Each snippet is rendered in a distinct card with its associated user-provided description.
+    *   **Audio and Video Snippet Walkthroughs**: Enable creators to record and attach short audio or video clips to their code snippets. These play directly within the feed, enhancing educational and entertainment value.
 
 *   **User Authentication and Profiles:**
     *   **Secure Registration & Login:** Users can register and log in with email and password.
-    *   **Basic User Profiles:** Upon registration, a basic user profile is created to associate users with the content they post.
+    *   **Advanced User Profiles with Pinned Content**: Expand user profiles to serve as a dynamic portfolio. Users can write a detailed bio, add links to external sites like GitHub or their personal blog, and 'pin' their most important code snippets to the top of their profile page for maximum visibility.
 
 *   **Snippet Creation and Posting:**
     *   **Intuitive Snippet Form:** Authenticated users can easily post new snippets.
@@ -67,6 +68,7 @@ We've packed Algorhythm with features designed for discovery and engagement.
     *   **Interactive Snippet Previews**: Engage with front-end code snippets (HTML, CSS, JavaScript) directly within the feed through live, sandboxed previews for UI components, animations, and data visualizations.
     *   **User-Curated Collections**: Create and manage public 'Collections' of related snippets from various creators (e.g., 'Advanced React Patterns', 'CSS Animation Tricks'), which can be shared and followed by others.
     *   **Real-time Notification Center**: Stay updated with a dedicated notification panel for likes, new comments, replies, new followers, and code forks.
+    *   **Private Direct Messaging**: Implement a real-time, one-on-one chat system allowing users to send private messages to each other. This feature will include a dedicated inbox and notification alerts for new messages, fostering direct collaboration, mentorship, and community building.
     *   **Coding Challenges:** Participate in weekly challenges to test your skills and see how others tackle the same problem.
     *   **Community Forks:** See a snippet you can improve or want to experiment with? "Fork" it, add your spin, and share it with the community.
     *   **Personalized Recommendations:** Our custom algorithm learns what you love—be it JavaScript animations, Python data science, or Rust performance hacks—and personalizes your feed.

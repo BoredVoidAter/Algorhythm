@@ -177,6 +177,24 @@ const SnippetCard = ({ snippet }) => {
         {snippet.code}
       </SyntaxHighlighter>
 
+      {snippet.audioWalkthroughUrl && (
+        <div style={styles.walkthroughContainer}>
+          <h4>Audio Walkthrough:</h4>
+          <audio controls src={snippet.audioWalkthroughUrl} style={styles.walkthroughPlayer}>
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      )}
+
+      {snippet.videoWalkthroughUrl && (
+        <div style={styles.walkthroughContainer}>
+          <h4>Video Walkthrough:</h4>
+          <video controls src={snippet.videoWalkthroughUrl} style={styles.walkthroughPlayer}>
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      )}
+
       {/* Interactive Snippet Preview */}
       {(snippet.language === 'html' || snippet.language === 'css' || snippet.language === 'javascript') && (
         <div style={styles.previewContainer}>
