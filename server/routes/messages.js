@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Message = require('../models/message');
-const auth = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 const { Op } = require('sequelize');
 
 // Send a message
-router.post('/', auth, async (req, res) => {
+router.post('/', authenticateToken, async (req, res) => {
   try {
     const { receiverId, content } = req.body;
     const message = await Message.create({
@@ -20,7 +20,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 // Get messages for a user (inbox/sent)
-router.get('/', auth, async (req, res) => {
+router.get('/', authenticateToken, async (req, res) => {
   try {
     const messages = await Message.findAll({
       where: {
@@ -38,7 +38,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Mark message as read
-router.put('/:id/read', auth, async (req, res) => {
+router.put('/:id/read', authenticateToken, async (req, res) => {
   try {
     const message = await Message.findByPk(req.params.id);
     if (!message) {

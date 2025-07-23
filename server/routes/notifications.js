@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Notification = require('../models/notification');
-const auth = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 
 // Get all notifications for the authenticated user
-router.get('/my', auth, async (req, res) => {
+router.get('/my', authenticateToken, async (req, res) => {
   try {
     const notifications = await Notification.findAll({
       where: { userId: req.user.id },
@@ -18,7 +18,7 @@ router.get('/my', auth, async (req, res) => {
 });
 
 // Mark a notification as read
-router.put('/:id/read', auth, async (req, res) => {
+router.put('/:id/read', authenticateToken, async (req, res) => {
   try {
     let notification = await Notification.findByPk(req.params.id);
 

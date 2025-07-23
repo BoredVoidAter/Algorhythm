@@ -5,10 +5,10 @@ const Team = require('../models/team');
 const TeamMember = require('../models/teamMember');
 const User = require('../models/user');
 const Snippet = require('../models/snippet');
-const auth = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 
 // Create a new team
-router.post('/', auth, async (req, res) => {
+router.post('/', authenticateToken, async (req, res) => {
   try {
     const { name, description } = req.body;
     const team = await Team.create({ name, description, ownerId: req.user.id });
@@ -48,7 +48,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Join a team
-router.post('/:id/join', auth, async (req, res) => {
+router.post('/:id/join', authenticateToken, async (req, res) => {
   try {
     const team = await Team.findByPk(req.params.id);
     if (!team) {
@@ -67,7 +67,7 @@ router.post('/:id/join', auth, async (req, res) => {
 });
 
 // Leave a team
-router.post('/:id/leave', auth, async (req, res) => {
+router.post('/:id/leave', authenticateToken, async (req, res) => {
   try {
     const team = await Team.findByPk(req.params.id);
     if (!team) {

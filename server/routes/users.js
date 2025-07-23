@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const Snippet = require('../models/snippet');
-const auth = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 
 // Get user profile
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', authenticateToken, async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id, {
       include: [{
@@ -23,7 +23,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Update user profile
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', authenticateToken, async (req, res) => {
   try {
     const updates = Object.keys(req.body);
     const allowedUpdates = ['bio', 'githubLink', 'personalWebsiteLink', 'pinnedSnippetId'];

@@ -73,6 +73,21 @@ We've packed Algorhythm with features designed for discovery and engagement.
     *   **Community Forks:** See a snippet you can improve or want to experiment with? "Fork" it, add your spin, and share it with the community.
     *   **Personalized Recommendations:** Our custom algorithm learns what you love—be it JavaScript animations, Python data science, or Rust performance hacks—and personalizes your feed.
 
+*   **Formal Code Review System:**
+    *   **Request Reviews:** Creators can formally request code reviews on their snippets.
+    *   **Line-by-Line Feedback:** Reviewers can provide detailed, line-by-line comments and suggest changes.
+    *   **Status Tracking:** Track review progress with statuses like 'Review Requested', 'Changes Needed', and 'Approved'.
+    *   **Notification Integration:** Seamlessly integrates with the notification center for a structured peer-review process.
+
+*   **Curated Learning Paths:**
+    *   **Structured Learning:** Follow ordered sequences of snippets and coding challenges created by experts.
+    *   **Progress Tracking:** Monitor your progress through various topics and technologies.
+    *   **Badges & Rewards:** Earn special badges displayed on your profile upon completing a learning path.
+
+*   **IDE Integration (VS Code Extension - Future Development):**
+    *   **Seamless Workflow:** Search and import snippets from Algorhythm directly into your VS Code editor.
+    *   **Direct Posting:** Publish new snippets from your IDE to the Algorhythm platform, streamlining discovery and sharing.
+
 ## 🛠️ For the Hobbyist Developer: The Tech & The Challenges
 
 Algorhythm is more than just a platform; it's a playground for developers who love a good technical challenge. If you're looking to sink your teeth into a meaningful project, this is the place. We are tackling some exciting problems:

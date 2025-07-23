@@ -52,6 +52,10 @@ const Snippet = sequelize.define('Snippet', {
   coAuthors: {
     type: DataTypes.STRING, // Storing co-author user IDs as a comma-separated string
     allowNull: true
+  },
+  reviewStatus: {
+    type: DataTypes.ENUM('None', 'Review Requested', 'Changes Needed', 'Approved'),
+    defaultValue: 'None'
   }
 });
 

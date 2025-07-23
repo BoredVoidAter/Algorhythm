@@ -4,7 +4,7 @@ const Comment = require('../models/comment');
 const Snippet = require('../models/snippet');
 const User = require('../models/user');
 const Notification = require('../models/notification');
-const auth = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 
 // Get comments for a snippet
 router.get('/:snippetId', async (req, res) => {
@@ -21,7 +21,7 @@ router.get('/:snippetId', async (req, res) => {
 });
 
 // Add a comment to a snippet
-router.post('/:snippetId', auth, async (req, res) => {
+router.post('/:snippetId', authenticateToken, async (req, res) => {
   const { content } = req.body;
   try {
     const newComment = await Comment.create({

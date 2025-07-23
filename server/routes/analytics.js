@@ -1,13 +1,13 @@
 
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 const Snippet = require('../models/snippet');
 const UserInteraction = require('../models/userInteraction');
 const { Op } = require('sequelize');
 
 // Get analytics for creator's snippets
-router.get('/snippets', auth, async (req, res) => {
+router.get('/snippets', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
 
@@ -71,7 +71,7 @@ router.get('/snippets', auth, async (req, res) => {
 });
 
 // Get follower growth trends (simplified - just total followers for now)
-router.get('/followers', auth, async (req, res) => {
+router.get('/followers', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
     const totalFollowers = await UserInteraction.count({

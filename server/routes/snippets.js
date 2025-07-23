@@ -1,7 +1,7 @@
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const auth = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 const Snippet = require('../models/snippet');
 const User = require('../models/user');
 const UserInteraction = require('../models/userInteraction');
@@ -15,7 +15,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'supersecretjwtkey';
 
 
 // Get all snippets
-router.get('/', auth, async (req, res) => {
+router.get('/', authenticateToken, async (req, res) => {
   try {
     const { tag } = req.query;
     let whereClause = {};
@@ -96,7 +96,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Create a new snippet
-router.post('/', auth, async (req, res) => {
+router.post('/', authenticateToken, async (req, res) => {
   const { title, code, language, tags, teamId, coAuthors } = req.body;
   try {
     let snippetUserId = req.user.userId;
@@ -121,7 +121,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 // Like a snippet
-router.post('/:id/like', auth, async (req, res) => {
+router.post('/:id/like', authenticateToken, async (req, res) => {
   try {
     const snippet = await Snippet.findByPk(req.params.id);
     if (!snippet) {
@@ -159,7 +159,7 @@ router.post('/:id/like', auth, async (req, res) => {
 });
 
 // Fork a snippet
-router.post('/:id/fork', auth, async (req, res) => {
+router.post('/:id/fork', authenticateToken, async (req, res) => {
   try {
     const originalSnippet = await Snippet.findByPk(req.params.id);
     if (!originalSnippet) {

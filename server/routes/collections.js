@@ -3,10 +3,10 @@ const router = express.Router();
 const Collection = require('../models/collection');
 const Snippet = require('../models/snippet');
 const CollectionSnippet = require('../models/collectionSnippet');
-const auth = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 
 // Create a new collection
-router.post('/', auth, async (req, res) => {
+router.post('/', authenticateToken, async (req, res) => {
   try {
     const { name, description, isPublic } = req.body;
     const newCollection = await Collection.create({
@@ -23,7 +23,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 // Get all collections for a user
-router.get('/my', auth, async (req, res) => {
+router.get('/my', authenticateToken, async (req, res) => {
   try {
     const collections = await Collection.findAll({
       where: { userId: req.user.id },
@@ -70,7 +70,7 @@ router.get('/public', async (req, res) => {
 });
 
 // Update a collection
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', authenticateToken, async (req, res) => {
   try {
     const { name, description, isPublic } = req.body;
     let collection = await Collection.findByPk(req.params.id);
@@ -96,7 +96,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // Delete a collection
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', authenticateToken, async (req, res) => {
   try {
     const collection = await Collection.findByPk(req.params.id);
 
@@ -117,7 +117,7 @@ router.delete('/:id', auth, async (req, res) => {
 });
 
 // Add a snippet to a collection
-router.post('/:collectionId/snippets/:snippetId', auth, async (req, res) => {
+router.post('/:collectionId/snippets/:snippetId', authenticateToken, async (req, res) => {
   try {
     const collection = await Collection.findByPk(req.params.collectionId);
     const snippet = await Snippet.findByPk(req.params.snippetId);
@@ -139,7 +139,7 @@ router.post('/:collectionId/snippets/:snippetId', auth, async (req, res) => {
 });
 
 // Remove a snippet from a collection
-router.delete('/:collectionId/snippets/:snippetId', auth, async (req, res) => {
+router.delete('/:collectionId/snippets/:snippetId', authenticateToken, async (req, res) => {
   try {
     const collection = await Collection.findByPk(req.params.collectionId);
     const snippet = await Snippet.findByPk(req.params.snippetId);

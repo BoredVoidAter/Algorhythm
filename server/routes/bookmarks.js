@@ -3,10 +3,10 @@ const router = express.Router();
 const Bookmark = require('../models/bookmark');
 const Snippet = require('../models/snippet');
 const User = require('../models/user');
-const auth = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 
 // Get all bookmarks for a user
-router.get('/', auth, async (req, res) => {
+router.get('/', authenticateToken, async (req, res) => {
   try {
     const bookmarks = await Bookmark.findAll({
       where: { userId: req.user.id },
@@ -20,7 +20,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Add a bookmark
-router.post('/:snippetId', auth, async (req, res) => {
+router.post('/:snippetId', authenticateToken, async (req, res) => {
   try {
     const existingBookmark = await Bookmark.findOne({
       where: { userId: req.user.id, snippetId: req.params.snippetId }
@@ -42,7 +42,7 @@ router.post('/:snippetId', auth, async (req, res) => {
 });
 
 // Remove a bookmark
-router.delete('/:snippetId', auth, async (req, res) => {
+router.delete('/:snippetId', authenticateToken, async (req, res) => {
   try {
     const bookmark = await Bookmark.findOne({
       where: { userId: req.user.id, snippetId: req.params.snippetId }

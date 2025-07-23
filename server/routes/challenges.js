@@ -1,5 +1,5 @@
 const express = require('express');
-const auth = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 const Challenge = require('../models/challenge');
 const Snippet = require('../models/snippet');
 const User = require('../models/user');
@@ -8,7 +8,7 @@ const { Op } = require('sequelize');
 const router = express.Router();
 
 // Create a new challenge (Admin only, or specific role)
-router.post('/', auth, async (req, res) => {
+router.post('/', authenticateToken, async (req, res) => {
   const { title, description, startDate, endDate, tag } = req.body;
   // TODO: Add role-based authorization here if needed
   try {

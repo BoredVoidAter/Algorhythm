@@ -2,12 +2,12 @@
 const express = require('express');
 const router = express.Router();
 const LiveSession = require('../models/liveSession');
-const auth = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 const Notification = require('../models/notification');
 const User = require('../models/user');
 
 // Schedule a new live session
-router.post('/', auth, async (req, res) => {
+router.post('/', authenticateToken, async (req, res) => {
   try {
     const { title, description, scheduledTime, streamUrl } = req.body;
     const liveSession = await LiveSession.create({
@@ -80,7 +80,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Update live session status (e.g., to 'live' or 'ended')
-router.put('/:id/status', auth, async (req, res) => {
+router.put('/:id/status', authenticateToken, async (req, res) => {
   try {
     const { status, recordingUrl, snippetId } = req.body;
     const liveSession = await LiveSession.findByPk(req.params.id);

@@ -1,5 +1,5 @@
 const express = require('express');
-const auth = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 const Follow = require('../models/follow');
 const User = require('../models/user');
 const Snippet = require('../models/snippet');
@@ -8,7 +8,7 @@ const Notification = require('../models/notification');
 const router = express.Router();
 
 // Follow a user
-router.post('/:id/follow', auth, async (req, res) => {
+router.post('/:id/follow', authenticateToken, async (req, res) => {
   try {
     const followingId = req.params.id;
     const followerId = req.user.userId;
@@ -45,7 +45,7 @@ router.post('/:id/follow', auth, async (req, res) => {
 });
 
 // Unfollow a user
-router.post('/:id/unfollow', auth, async (req, res) => {
+router.post('/:id/unfollow', authenticateToken, async (req, res) => {
   try {
     const followingId = req.params.id;
     const followerId = req.user.userId;
@@ -65,7 +65,7 @@ router.post('/:id/unfollow', auth, async (req, res) => {
 });
 
 // Get snippets from followed users
-router.get('/following/snippets', auth, async (req, res) => {
+router.get('/following/snippets', authenticateToken, async (req, res) => {
   try {
     const followerId = req.user.userId;
 
@@ -96,7 +96,7 @@ router.get('/following/snippets', auth, async (req, res) => {
 });
 
 // Check if current user is following a specific user
-router.get('/is-following/:userId', auth, async (req, res) => {
+router.get('/is-following/:userId', authenticateToken, async (req, res) => {
   try {
     const followerId = req.user.userId;
     const followingId = req.params.userId;
