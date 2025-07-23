@@ -4,11 +4,14 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 const SnippetForm = () => {
   const [title, setTitle] = useState('');
   const [code, setCode] = useState('');
   const [language, setLanguage] = useState('javascript');
   const [tags, setTags] = useState('');
+  const [aiFeedback, setAiFeedback] = useState('');
+  
   const navigate = useNavigate();
   const { id: forkId } = useParams(); // Get forkId from URL
 
@@ -28,8 +31,31 @@ const SnippetForm = () => {
         }
       };
       fetchOriginalSnippet();
-    }
+
+      
   }, [forkId]);
+
+  
+
+  const handleCodeChange = (e) => {
+    setCode(e.target.value);
+  };
+
+  
+
+  const getAiFeedback = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.post('http://localhost:5000/api/snippets/ai-feedback',
+        { code, language },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setAiFeedback(response.data.feedback);
+    } catch (err) {
+      console.error('Failed to get AI feedback:', err);
+      setAiFeedback('Failed to get AI feedback. Please try again.');
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,8 +83,9 @@ const SnippetForm = () => {
         </div>
         <div>
           <label>Code:</label>
-          <textarea value={code} onChange={(e) => setCode(e.target.value)} rows="10" required></textarea>
+          <textarea value={code} onChange={handleCodeChange} rows="10" required></textarea>
         </div>
+        
         <div>
           <label>Language:</label>
           <select value={language} onChange={(e) => setLanguage(e.target.value)}>
@@ -98,7 +125,14 @@ const SnippetForm = () => {
           <input type="text" value={tags} onChange={(e) => setTags(e.target.value)} placeholder="e.g., javascript, react, ui" />
         </div>
         <button type="submit">Post Snippet</button>
+        <button type="button" onClick={getAiFeedback} style={{ marginLeft: '10px' }}>Get AI Feedback</button>
       </form>
+      {aiFeedback && (
+        <div style={{ marginTop: '20px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', backgroundColor: '#f9f9f9' }}>
+          <h3>AI Feedback:</h3>
+          <p>{aiFeedback}</p>
+        </div>
+      )}
     </div>
   );
 };

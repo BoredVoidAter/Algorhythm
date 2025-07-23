@@ -26,7 +26,7 @@ const SnippetCard = ({ snippet }) => {
     if (token) {
       fetchUserCollections();
     }
-  }, [snippet.id, token, snippet.User]);
+  }, [snippet.id, token, snippet.User, checkBookmarkStatus, checkFollowingStatus, fetchComments, fetchUserCollections]);
 
   const fetchUserCollections = async () => {
     try {

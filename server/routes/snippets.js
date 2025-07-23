@@ -192,4 +192,45 @@ router.post('/:id/fork', authenticateToken, async (req, res) => {
   }
 });
 
+// AI-powered code assistant feedback
+router.post('/ai-feedback', authenticateToken, async (req, res) => {
+  const { code, language } = req.body;
+  // In a real application, this would call an external AI service
+  // For now, we'll return a mock response
+  let feedback = "Looks good! Consider adding more comments for complex parts.";
+  if (language === 'javascript' && code.includes('var ')) {
+    feedback += " Also, 'var' is outdated in modern JavaScript; consider using 'let' or 'const'.";
+  } else if (language === 'python' && code.includes(';')) {
+    feedback += " Python doesn't typically use semicolons at the end of lines.";
+  } else if (code.length < 20) {
+    feedback += " The code seems a bit short. Is it complete?";
+  }
+
+  res.json({ feedback });
+});
+
+// Semantic search for snippets
+router.post('/search-semantic', authenticateToken, async (req, res) => {
+  const { query } = req.body;
+  try {
+    const snippets = await Snippet.findAll({
+      where: {
+        [Op.or]: [
+          { title: { [Op.like]: `%${query}%` } },
+          { code: { [Op.like]: `%${query}%` } },
+          { tags: { [Op.like]: `%${query}%` } },
+        ],
+      },
+      include: [{
+        model: User,
+        attributes: ['id', 'email']
+      }],
+      order: [['createdAt', 'DESC']],
+    });
+    res.json(snippets);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;

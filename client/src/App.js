@@ -14,6 +14,8 @@ import NotificationCenter from './components/NotificationCenter';
 import UserProfile from './components/UserProfile';
 import MessageList from './components/MessageList';
 import MessageForm from './components/MessageForm';
+import AssessmentList from './components/AssessmentList';
+import AssessmentDetail from './components/AssessmentDetail';
 
 function App() {
   return (
@@ -32,6 +34,7 @@ function App() {
           <Link to="/notifications" style={styles.navLink}>Notifications</Link>
           <Link to="/profile/:id" style={styles.navLink}>My Profile</Link>
           <Link to="/messages" style={styles.navLink}>Messages</Link>
+          <Link to="/assessments" style={styles.navLink}>Assessments</Link>
         </nav>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -50,6 +53,8 @@ function App() {
           <Route path="/profile/:id" element={<UserProfile />} />
           <Route path="/messages" element={<MessageList />} />
           <Route path="/messages/new/:receiverId" element={<MessageForm />} />
+          <Route path="/assessments" element={<AssessmentList />} />
+          <Route path="/assessments/:id" element={<AssessmentDetail />} />
         </Routes>
       </div>
     </Router>

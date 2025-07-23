@@ -79,7 +79,19 @@ We've packed Algorhythm with features designed for discovery and engagement.
     *   **Status Tracking:** Track review progress with statuses like 'Review Requested', 'Changes Needed', and 'Approved'.
     *   **Notification Integration:** Seamlessly integrates with the notification center for a structured peer-review process.
 
-*   **Curated Learning Paths:**
+*   **AI-Powered Code Assistant:**
+    *   Integrate an AI-powered assistant directly into the snippet creation and review process. This assistant will offer automated feedback on code quality, suggest performance optimizations, identify potential bugs, and help generate documentation.
+
+*   **Verifiable Skill Assessments and Badges:**
+    *   Introduce a system for official, timed coding assessments that test specific skills (e.g., algorithms, framework proficiency). Successfully passing an assessment awards the user a verifiable skill badge that is prominently displayed on their profile.
+
+*   **Real-time Collaborative Editing:**
+    *   Enable multiple users to simultaneously edit a single code snippet in a shared, real-time 'Pair Programming' session. The feature includes synchronized cursors, live text updates, and an integrated chat.
+
+*   **Advanced Semantic Search:**
+    *   Upgrade the platform's search functionality from keyword matching to a semantic search engine. This allows users to search using natural language questions and find functionally relevant snippets, even if they don't contain the exact search terms.
+
+*   **Curated Learning Paths:
     *   **Structured Learning:** Follow ordered sequences of snippets and coding challenges created by experts.
     *   **Progress Tracking:** Monitor your progress through various topics and technologies.
     *   **Badges & Rewards:** Earn special badges displayed on your profile upon completing a learning path.

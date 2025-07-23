@@ -1,6 +1,8 @@
 
 const sequelize = require('../config/database');
 const Badge = require('./badge');
+const Assessment = require('./assessment');
+const Submission = require('./submission');
 const Bookmark = require('./bookmark');
 const Challenge = require('./challenge');
 const Collection = require('./collection');
@@ -23,9 +25,20 @@ const UserInteraction = require('./userInteraction');
 const UserLearningPathProgress = require('./userLearningPathProgress');
 
 // Define associations here if they are not already defined within the model files
-// For example:
-// User.hasMany(Snippet, { foreignKey: 'userId' });
-// Snippet.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Submission, { foreignKey: 'userId' });
+Submission.belongsTo(User, { foreignKey: 'userId' });
+
+Assessment.hasMany(Submission, { foreignKey: 'assessmentId' });
+Submission.belongsTo(Assessment, { foreignKey: 'assessmentId' });
+
+Badge.hasMany(Assessment, { foreignKey: 'badgeId' });
+Assessment.belongsTo(Badge, { foreignKey: 'badgeId' });
+
+// User earned badges (many-to-many relationship)
+const UserBadge = sequelize.define('UserBadge', {}, { timestamps: false });
+User.belongsToMany(Badge, { through: UserBadge, foreignKey: 'userId' });
+Badge.belongsToMany(User, { through: UserBadge, foreignKey: 'badgeId' });
+
 
 // Sync all models with the database
 sequelize.sync()
@@ -57,5 +70,7 @@ module.exports = {
   Tip,
   User,
   UserInteraction,
-  UserLearningPathProgress
+  UserLearningPathProgress,
+  Assessment,
+  Submission
 };
