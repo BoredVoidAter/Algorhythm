@@ -97,9 +97,23 @@ router.get('/', auth, async (req, res) => {
 
 // Create a new snippet
 router.post('/', auth, async (req, res) => {
-  const { title, code, language, tags } = req.body;
+  const { title, code, language, tags, teamId, coAuthors } = req.body;
   try {
-    const snippet = await Snippet.create({ title, code, language, tags, userId: req.user.userId });
+    let snippetUserId = req.user.userId;
+    if (teamId) {
+      const team = await Team.findByPk(teamId);
+      if (!team) {
+        return res.status(404).json({ msg: 'Team not found' });
+      }
+      const isTeamMember = await TeamMember.findOne({ where: { teamId, userId: req.user.userId } });
+      if (!isTeamMember) {
+        return res.status(403).json({ msg: 'You are not a member of this team' });
+      }
+      // If a teamId is provided, the snippet is associated with the team, not a single user directly
+      // The userId on the snippet will still be the creator, but the teamId indicates it's a team snippet
+    }
+
+    const snippet = await Snippet.create({ title, code, language, tags, userId: snippetUserId, teamId, coAuthors });
     res.status(201).json(snippet);
   } catch (error) {
     res.status(400).json({ error: error.message });

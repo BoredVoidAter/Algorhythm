@@ -2,6 +2,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const User = require('./user');
+const Team = require('./team');
 
 const Snippet = sequelize.define('Snippet', {
   title: {
@@ -39,10 +40,25 @@ const Snippet = sequelize.define('Snippet', {
   videoWalkthroughUrl: {
     type: DataTypes.STRING,
     allowNull: true
+  },
+  teamId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'Teams',
+      key: 'id'
+    }
+  },
+  coAuthors: {
+    type: DataTypes.STRING, // Storing co-author user IDs as a comma-separated string
+    allowNull: true
   }
 });
 
 User.hasMany(Snippet, { foreignKey: 'userId' });
 Snippet.belongsTo(User, { foreignKey: 'userId' });
+
+Team.hasMany(Snippet, { foreignKey: 'teamId' });
+Snippet.belongsTo(Team, { foreignKey: 'teamId' });
 
 module.exports = Snippet;

@@ -11,7 +11,14 @@ const collectionRoutes = require('./routes/collections');
 const notificationRoutes = require('./routes/notifications');
 const userRoutes = require('./routes/users');
 const messageRoutes = require('./routes/messages');
+const teamRoutes = require('./routes/teams');
+const analyticsRoutes = require('./routes/analytics');
+const liveSessionRoutes = require('./routes/liveSessions');
 const UserInteraction = require('./models/userInteraction');
+const Team = require('./models/team');
+const TeamMember = require('./models/teamMember');
+const LiveSession = require('./models/liveSession');
+const Tip = require('./models/tip');
 const sequelize = require('./config/database');
 
 const app = express();
@@ -29,6 +36,9 @@ app.use('/api/collections', collectionRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/messages', messageRoutes);
+app.use('/api/teams', teamRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/live-sessions', liveSessionRoutes);
 
 const PORT = process.env.PORT || 5000;
 
