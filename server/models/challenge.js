@@ -23,6 +23,26 @@ const Challenge = sequelize.define('Challenge', {
     type: DataTypes.STRING, // Unique tag for the challenge
     allowNull: false,
     unique: true
+  },
+  isAIGenerated: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  difficulty: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  testCases: {
+    type: DataTypes.JSON,
+    allowNull: true
+  },
+  solutionSnippetId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'Snippets',
+      key: 'id'
+    }
   }
 });
 

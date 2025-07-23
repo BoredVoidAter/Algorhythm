@@ -23,6 +23,9 @@ const Tip = require('./tip');
 const User = require('./user');
 const UserInteraction = require('./userInteraction');
 const UserLearningPathProgress = require('./userLearningPathProgress');
+const JobListing = require('./jobListing');
+const PremiumSnippet = require('./premiumSnippet');
+const ChallengeSubmission = require('./challengeSubmission');
 
 // Define associations here if they are not already defined within the model files
 User.hasMany(Submission, { foreignKey: 'userId' });
@@ -72,5 +75,8 @@ module.exports = {
   UserInteraction,
   UserLearningPathProgress,
   Assessment,
-  Submission
+  Submission,
+  JobListing,
+  PremiumSnippet,
+  ChallengeSubmission
 };

@@ -31,11 +31,8 @@ const SnippetForm = () => {
         }
       };
       fetchOriginalSnippet();
-
-      
+    }
   }, [forkId]);
-
-  
 
   const handleCodeChange = (e) => {
     setCode(e.target.value);

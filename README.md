@@ -40,6 +40,18 @@ Whether it's an **elegant sorting algorithm**, a **clever UI trick in CSS**, or 
 
 We've packed Algorhythm with features designed for discovery and engagement.
 
+*   **Talent Marketplace and Recruiter Tools:**
+    *   Introduce a dedicated marketplace where companies can post job listings and proactively search for talent. Recruiters gain access to advanced search filters based on verified skills, languages, engagement metrics, and location. Users can opt-in to a 'hirable' status, making their portfolio and verified skill badges visible to potential employers, turning the platform into a direct career development and recruitment channel.
+
+*   **Premium Snippet Marketplace and Licensing:**
+    *   Allow creators to list and sell premium, high-value code snippets, components, or templates through a dedicated marketplace. The system will handle secure transactions and allow creators to select from various licensing models (e.g., MIT, GPL, Commercial Use). This provides a new monetization path for advanced contributors and gives users access to production-ready code.
+
+*   **Platform-Wide Gamification and Reputation System:**
+    *   Implement a comprehensive gamification layer that awards users experience points (XP) and reputation scores for positive contributions, such as posting popular snippets, providing helpful code reviews, completing learning paths, and answering questions in comments. Gaining levels unlocks cosmetic rewards like profile badges and frames, and a high reputation score provides greater visibility within the platform's recommendation algorithms and talent marketplace.
+
+*   **Automated Challenge Generation and Judging:**
+    *   Integrate an AI-powered system to automatically generate new coding challenges based on trending topics or identified skill gaps within the community. The same system will also provide automated judging for challenge submissions, offering instant feedback on correctness, performance, and code style against a predefined rubric, allowing for a scalable and constantly refreshing stream of community challenges.
+
 *   **Core Snippet Feed and Rendering:**
     *   **Infinite Vertical Feed:** Our core experience. Scroll endlessly through a stream of code snippets curated just for you. The next "aha!" moment is just a swipe away.
     *   **Interactive Syntax Highlighting:** Beautiful, multi-language support makes your code readable and professional. Each snippet is rendered in a distinct card with its associated user-provided description.

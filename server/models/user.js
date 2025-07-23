@@ -31,6 +31,30 @@ const User = sequelize.define('User', {
       model: 'Snippets',
       key: 'id'
     }
+  },
+  isHirable: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  skills: {
+    type: DataTypes.JSON,
+    allowNull: true
+  },
+  location: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  experiencePoints: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  },
+  reputationScore: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  },
+  level: {
+    type: DataTypes.INTEGER,
+    defaultValue: 1
   }
 });
 
